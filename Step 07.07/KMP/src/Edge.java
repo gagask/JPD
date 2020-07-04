@@ -1,24 +1,23 @@
 import java.awt.*;
 
 public class Edge {
-    private int x_to;
-    private int y_to;
-    private int x_from;
-    private int y_from;
+    private final Vertex from;
+    private final Vertex to;
     private Color color;
 
-    public Edge(int x_to, int y_to, int x_from, int y_from, Color color)
-    {
-        this.x_to = x_to;
-        this.x_from = x_from;
-        this.y_to = y_to;
-        this.y_from = y_from;
+    public Edge(Vertex from, Vertex to, Color color) {
+        this.from = from;
+        this.to = to;
         this.color = color;
     }
 
     public void draw(Graphics g)
     {
         g.setColor(color);
-        g.drawLine(x_from, y_from, x_to, y_to);
+        g.drawLine(from.getX() + 20, from.getY() + 20, to.getX() + 20, to.getY() + 20);
+    }
+
+    public boolean isIncidental(Vertex v1) {
+        return from == v1 || to == v1;
     }
 }

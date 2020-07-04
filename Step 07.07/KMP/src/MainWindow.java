@@ -1,5 +1,3 @@
-import com.mxgraph.swing.mxGraphComponent;
-import com.mxgraph.view.mxGraph;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,6 +5,7 @@ import java.awt.*;
 enum ButtonState{
     addVertex,
     removeVertex,
+    removeEdge,
     addEdge,
     Start,
     noButton
@@ -19,7 +18,6 @@ public class MainWindow extends JFrame {
     private JButton addEdge;
     private JButton removeEdge;
     private JButton Start;
-    private mxGraph graph;
     private ButtonState buttonState;
 
 
@@ -32,10 +30,10 @@ public class MainWindow extends JFrame {
         addEdge = new JButton("       Добавить ребро       ");
         removeEdge = new JButton("        Удалить ребро        ");
         Start = new JButton("    Запустить алгоритм    ");
-        graph = new mxGraph();
 
         addVertex.addActionListener(new addVertexButtonListener(this));
         removeVertex.addActionListener(new removeVertexButtonListener(this));
+        removeEdge.addActionListener(new removeEdgeButtonListener(this));
         addEdge.addActionListener(new addEdgeButtonListener(this));
         Start.addActionListener(new StartButtonListener(this));
 
