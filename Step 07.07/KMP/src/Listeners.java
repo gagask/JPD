@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-abstract class ListenerBase {
+abstract class ListenerBase implements ActionListener{
     protected MainWindow window;
 
     public ListenerBase(MainWindow a){
@@ -13,7 +13,7 @@ abstract class ListenerBase {
     }
 }
 
-class addVertexButtonListener extends ListenerBase implements ActionListener{
+class addVertexButtonListener extends ListenerBase {
 
 
     public addVertexButtonListener(MainWindow a) {
@@ -26,7 +26,7 @@ class addVertexButtonListener extends ListenerBase implements ActionListener{
     }
 }
 
-class addEdgeButtonListener extends ListenerBase implements  ActionListener{
+class addEdgeButtonListener extends ListenerBase{
 
     public addEdgeButtonListener(MainWindow a) {
         super(a);
@@ -38,7 +38,7 @@ class addEdgeButtonListener extends ListenerBase implements  ActionListener{
     }
 }
 
-class removeVertexButtonListener extends ListenerBase implements  ActionListener{
+class removeVertexButtonListener extends ListenerBase{
 
     public removeVertexButtonListener(MainWindow a) {
         super(a);
@@ -50,7 +50,7 @@ class removeVertexButtonListener extends ListenerBase implements  ActionListener
     }
 }
 
-class StartButtonListener extends ListenerBase implements  ActionListener{
+class StartButtonListener extends ListenerBase{
 
     public StartButtonListener(MainWindow a) {
         super(a);
