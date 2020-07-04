@@ -1,5 +1,7 @@
 import com.mxgraph.view.mxGraph;
 
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -62,20 +64,23 @@ class StartButtonListener extends ListenerBase{
     }
 }
 
-class MainWindowMouseListener implements MouseListener{
-    private mxGraph graph;
-    private MainWindow window;
+class GraphPanelMouseListener implements MouseListener{
+    private final GraphPanel panel;
+    private final MainWindow window;
 
-    public MainWindowMouseListener(mxGraph a, MainWindow b){
-        graph = a;
-        window = b;
+    public GraphPanelMouseListener(GraphPanel panel, MainWindow window){
+        this.panel = panel;
+        this.window = window;
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if(window.getButtonState() == ButtonState.addVertex){
-            graph.insertVertex(graph.getDefaultParent(),null, "someNew", e.getX(),e.getY(),80,30);
-            window.setButtonState(ButtonState.noButton);
+        switch (window.getButtonState())
+        {
+            case addVertex:
+                panel.addVertex(new Vertex(e.getX() - 20, e.getY() - 20, 40, Color.BLACK));
+                window.setButtonState(ButtonState.noButton);
+                break;
         }
     }
 
