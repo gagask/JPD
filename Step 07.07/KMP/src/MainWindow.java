@@ -20,7 +20,7 @@ public class MainWindow extends JFrame {
     private JButton removeEdge;
     private JButton Start;
     private mxGraph graph;
-    public ButtonState buttonState;
+    private ButtonState buttonState;
 
 
     public MainWindow(String hi){
@@ -73,5 +73,13 @@ public class MainWindow extends JFrame {
 
         add(LeftPanel);
         add(new mxGraphComponent(graph));
+    }
+
+    public ButtonState getButtonState() {
+        return buttonState;
+    }
+
+    public void setButtonState(ButtonState buttonState) {
+        this.buttonState = buttonState;
     }
 }

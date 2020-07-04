@@ -22,7 +22,7 @@ class addVertexButtonListener extends ListenerBase implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        window.buttonState = ButtonState.addVertex;
+        window.setButtonState(ButtonState.addVertex);
     }
 }
 
@@ -34,7 +34,7 @@ class addEdgeButtonListener extends ListenerBase implements  ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        window.buttonState = ButtonState.addEdge;
+        window.setButtonState(ButtonState.addEdge);
     }
 }
 
@@ -46,7 +46,7 @@ class removeVertexButtonListener extends ListenerBase implements  ActionListener
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        window.buttonState = ButtonState.removeVertex;
+        window.setButtonState(ButtonState.removeVertex);
     }
 }
 
@@ -58,7 +58,7 @@ class StartButtonListener extends ListenerBase implements  ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        window.buttonState = ButtonState.Start;
+        window.setButtonState(ButtonState.Start);
     }
 }
 
@@ -73,9 +73,9 @@ class MainWindowMouseListener implements MouseListener{
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if(window.buttonState == ButtonState.addVertex){
+        if(window.getButtonState() == ButtonState.addVertex){
             graph.insertVertex(graph.getDefaultParent(),null, "someNew", e.getX(),e.getY(),80,30);
-            window.buttonState = ButtonState.noButton;
+            window.setButtonState(ButtonState.noButton);
         }
     }
 
