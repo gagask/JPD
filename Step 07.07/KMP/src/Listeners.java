@@ -76,6 +76,18 @@ class removeEdgeButtonListener extends ListenerBase{
     }
 }
 
+class OkWeightDialogButtonLister extends ListenerBase
+{
+    public OkWeightDialogButtonLister(MainWindow a) {
+        super(a);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        window.setEnabled(true);
+    }
+}
+
 class GraphPanelMouseListener implements MouseListener{
     private final GraphPanel panel;
     private final MainWindow window;
@@ -99,7 +111,11 @@ class GraphPanelMouseListener implements MouseListener{
                 if (addEdgeResult != null)
                 {
                     if (VertexSave != null) {
-                        panel.addEdge(new Edge(VertexSave, addEdgeResult, Color.BLACK));
+                        WeightDialog dialog = new WeightDialog(window);
+                        dialog.setVisible(true);
+
+
+                        panel.addEdge(new Edge(VertexSave, addEdgeResult, Color.BLACK, 10));
                         window.setButtonState(ButtonState.noButton);
                         VertexSave = null;
                     }

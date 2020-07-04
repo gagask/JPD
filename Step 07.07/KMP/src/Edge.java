@@ -4,11 +4,13 @@ public class Edge {
     private final Vertex from;
     private final Vertex to;
     private Color color;
+    private int weight;
 
-    public Edge(Vertex from, Vertex to, Color color) {
+    public Edge(Vertex from, Vertex to, Color color, int weight) {
         this.from = from;
         this.to = to;
         this.color = color;
+        this.weight = weight;
     }
 
     public void draw(Graphics g)

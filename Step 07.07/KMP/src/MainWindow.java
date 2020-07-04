@@ -53,9 +53,7 @@ public class MainWindow extends JFrame {
         LeftPanel.add(Box.createRigidArea(new Dimension(0,20)));
 
         String str = "Алгоритм Прима - алгоритмпостроения минимального  остовного дерева взвешен-ного связного неориентир-ованного графа. Алгоритм впервые был открыт в 1930году чешским математиком Войцехом Ярником, позже  открыт Робертом Примом в 1957 году, и, независимо от них, Дейкстрой в 1959 году.                             ";
-        for (int i = 0 ; i < str.length() - 25; i += 25){
-            LeftPanel.add(new JLabel(str.substring(i, i + 25)));
-        }
+        for (int i = 0 ; i < str.length() - 25; i += 25) LeftPanel.add(new JLabel(str.substring(i, i + 25)));
 
         GraphPanel RightPanel = new GraphPanel(MainWindowPanel);
         RightPanel.addMouseListener(new GraphPanelMouseListener(RightPanel, this));
