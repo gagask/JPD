@@ -128,6 +128,7 @@ class GraphPanelMouseListener implements MouseListener{
                     for (Edge edge : result)
                         panel.removeEdge(edge);
                     panel.removeVertex(removeVertex);
+                    window.setButtonState(ButtonState.noButton);
                 }
 
 

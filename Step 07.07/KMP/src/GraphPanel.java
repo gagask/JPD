@@ -86,5 +86,6 @@ public class GraphPanel extends JPanel {
 
     public void removeVertex(Vertex v) {
         vertexList.remove(v);
+        MainWindowPanel.repaint();
     }
 }
