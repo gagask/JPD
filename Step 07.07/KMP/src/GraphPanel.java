@@ -101,9 +101,6 @@ public class GraphPanel extends JPanel {
 
         vertexList.get(startVertexInd).changeColor(Color.GREEN);
         MainWindowPanel.repaint();
-        long a = 0;
-        while (a <= 1000000000)
-            ++a;
 
         HashSet<Edge> resultEdgeSet = new HashSet<Edge>();
         HashSet<Edge> curTreeEdge = new HashSet<Edge>();
@@ -124,9 +121,6 @@ public class GraphPanel extends JPanel {
 
                     if (!resultVertexSet.contains(curNewVertex))
                         curTreeEdge.add(e);
-
-
-
                 }
 
             }
@@ -136,9 +130,6 @@ public class GraphPanel extends JPanel {
             {
                 e.changeColor(Color.YELLOW);
                 MainWindowPanel.repaint();
-                 a = 0;
-                while (a <= 10000000)
-                    ++a;
                 if (min == null || e.getWeight() < min.getWeight())
                     min = e;
             }
@@ -148,9 +139,6 @@ public class GraphPanel extends JPanel {
 
             min.changeColor(Color.GREEN);
             MainWindowPanel.repaint();
-            a = 0;
-            while (a <= 1000000000)
-                ++a;
 
             Vertex curNewVertex = endings.from;
             if (resultVertexSet.contains(curNewVertex))
@@ -158,9 +146,6 @@ public class GraphPanel extends JPanel {
 
             curNewVertex.changeColor(Color.GREEN);
             MainWindowPanel.repaint();
-            a = 0;
-            while (a <= 1000000000)
-                ++a;
 
             resultVertexSet.add(curNewVertex);
 
