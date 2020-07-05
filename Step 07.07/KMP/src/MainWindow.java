@@ -7,17 +7,17 @@ enum ButtonState{
     removeVertex,
     removeEdge,
     addEdge,
-    Start,
     noButton
 }
 
 public class MainWindow extends JFrame {
 
-    private JButton addVertex;
-    private JButton removeVertex;
-    private JButton addEdge;
-    private JButton removeEdge;
-    private JButton Start;
+    private final JButton addVertex;
+    private final JButton removeVertex;
+    private final JButton addEdge;
+    private final JButton removeEdge;
+    private final JButton Start;
+    private final GraphPanel graph;
     private ButtonState buttonState;
 
 
@@ -55,12 +55,12 @@ public class MainWindow extends JFrame {
         String str = "Алгоритм Прима - алгоритмпостроения минимального  остовного дерева взвешен-ного связного неориентир-ованного графа. Алгоритм впервые был открыт в 1930году чешским математиком Войцехом Ярником, позже  открыт Робертом Примом в 1957 году, и, независимо от них, Дейкстрой в 1959 году.                             ";
         for (int i = 0 ; i < str.length() - 25; i += 25) LeftPanel.add(new JLabel(str.substring(i, i + 25)));
 
-        GraphPanel RightPanel = new GraphPanel(MainWindowPanel);
-        RightPanel.addMouseListener(new GraphPanelMouseListener(RightPanel, this));
+        graph = new GraphPanel(MainWindowPanel);
+        graph.addMouseListener(new GraphPanelMouseListener(graph, this));
 
         MainWindowPanel.setLayout(new BoxLayout(MainWindowPanel, BoxLayout.X_AXIS));
         MainWindowPanel.add(LeftPanel);
-        MainWindowPanel.add(RightPanel);
+        MainWindowPanel.add(graph);
         setContentPane(MainWindowPanel);
     }
 
@@ -70,5 +70,9 @@ public class MainWindow extends JFrame {
 
     public void setButtonState(ButtonState buttonState) {
         this.buttonState = buttonState;
+    }
+
+    public GraphPanel getGraph() {
+        return graph;
     }
 }

@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
 
 public class GraphPanel extends JPanel {
@@ -88,6 +88,86 @@ public class GraphPanel extends JPanel {
 
     public void removeVertex(Vertex v) {
         vertexList.remove(v);
+        MainWindowPanel.repaint();
+    }
+
+    public void AlgorithPrima() throws InterruptedException {
+        Random random = new Random();
+        Thread th = Thread.currentThread( );
+        int startVertexInd = random.nextInt(vertexList.size());
+
+        HashSet<Vertex> resultVertexSet = new HashSet<Vertex>();
+        resultVertexSet.add(vertexList.get(startVertexInd));
+
+        vertexList.get(startVertexInd).changeColor(Color.GREEN);
+        MainWindowPanel.repaint();
+        long a = 0;
+        while (a <= 1000000000)
+            ++a;
+
+        HashSet<Edge> resultEdgeSet = new HashSet<Edge>();
+        HashSet<Edge> curTreeEdge = new HashSet<Edge>();
+
+        while (resultVertexSet.size() != vertexList.size())
+        {
+
+            for (Vertex v : resultVertexSet)
+            {
+                ArrayList<Edge> tmpEdgeList = getIncidentalEdges(v);
+
+                for (Edge e : tmpEdgeList)
+                {
+                    VertexPair curEdgeEndings = e.getEndings();
+                    Vertex curNewVertex = curEdgeEndings.from;
+                    if (v == curNewVertex)
+                        curNewVertex = curEdgeEndings.to;
+
+                    if (!resultVertexSet.contains(curNewVertex))
+                        curTreeEdge.add(e);
+
+
+
+                }
+
+            }
+
+            Edge min = null;
+            for (Edge e : curTreeEdge)
+            {
+                e.changeColor(Color.YELLOW);
+                MainWindowPanel.repaint();
+                 a = 0;
+                while (a <= 10000000)
+                    ++a;
+                if (min == null || e.getWeight() < min.getWeight())
+                    min = e;
+            }
+
+            VertexPair endings = min.getEndings();
+            resultEdgeSet.add(min);
+
+            min.changeColor(Color.GREEN);
+            MainWindowPanel.repaint();
+            a = 0;
+            while (a <= 1000000000)
+                ++a;
+
+            Vertex curNewVertex = endings.from;
+            if (resultVertexSet.contains(curNewVertex))
+                curNewVertex = endings.to;
+
+            curNewVertex.changeColor(Color.GREEN);
+            MainWindowPanel.repaint();
+            a = 0;
+            while (a <= 1000000000)
+                ++a;
+
+            resultVertexSet.add(curNewVertex);
+
+            curTreeEdge.clear();
+        }
+
+        edgeList = new ArrayList<Edge>(resultEdgeSet);
         MainWindowPanel.repaint();
     }
 }

@@ -56,8 +56,13 @@ class StartButtonListener extends ListenerBase{
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        window.setButtonState(ButtonState.Start);
+    public void actionPerformed(ActionEvent e)
+    {
+        try {
+            window.getGraph().AlgorithPrima();
+        } catch (InterruptedException interruptedException) {
+            interruptedException.printStackTrace();
+        }
     }
 }
 
@@ -118,11 +123,11 @@ class GraphPanelMouseListener implements MouseListener{
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
+    public void mousePressed(MouseEvent e) {
         switch (window.getButtonState())
         {
             case addVertex:
-                panel.addVertex(new Vertex(e.getX() - 20, e.getY() - 20, 40, Color.BLACK));
+                panel.addVertex(new Vertex(e.getX() - 20, e.getY() - 20, 40, Color.RED));
                 window.setButtonState(ButtonState.noButton);
                 break;
             case addEdge:
@@ -142,7 +147,7 @@ class GraphPanelMouseListener implements MouseListener{
                             return;
                         }
 
-                        panel.addEdge(new Edge(VertexSave, addEdgeResult, Color.BLACK, dialog.getWeight()));
+                        panel.addEdge(new Edge(VertexSave, addEdgeResult, Color.RED, dialog.getWeight()));
                         window.setButtonState(ButtonState.noButton);
                         VertexSave = null;
                     }
@@ -179,7 +184,7 @@ class GraphPanelMouseListener implements MouseListener{
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {
+    public void mouseClicked(MouseEvent e) {
 
     }
 

@@ -1,5 +1,16 @@
 import java.awt.*;
 
+class VertexPair
+{
+    public final Vertex from;
+    public final Vertex to;
+
+    public VertexPair(Vertex from, Vertex to) {
+        this.from = from;
+        this.to = to;
+    }
+}
+
 public class Edge {
     private final Vertex from;
     private final Vertex to;
@@ -30,6 +41,20 @@ public class Edge {
 
     public boolean isIncidental(Vertex v1) {
         return from == v1 || to == v1;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public VertexPair getEndings()
+    {
+        return new VertexPair(from, to);
+    }
+
+    public void changeColor(Color color)
+    {
+        this.color = color;
     }
 
 }

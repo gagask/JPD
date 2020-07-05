@@ -35,4 +35,7 @@ public class Vertex{
     }
 
 
+    public void changeColor(Color yellow) {
+        this.color = yellow;
+    }
 }
