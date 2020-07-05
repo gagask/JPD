@@ -33,8 +33,10 @@ public class GraphPanel extends JPanel {
         for (Vertex v : vertexList)
             v.draw(g);
 
-        for (Edge e : edgeList)
+        for (Edge e : edgeList) {
             e.draw(g);
+
+        }
     }
 
     public Vertex getContainingVertex(int x, int y)

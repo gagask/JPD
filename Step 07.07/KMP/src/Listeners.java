@@ -1,10 +1,7 @@
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 abstract class ListenerBase implements ActionListener{
@@ -76,17 +73,39 @@ class removeEdgeButtonListener extends ListenerBase{
     }
 }
 
-class OkWeightDialogButtonLister extends ListenerBase
+class TextAreaActionListener extends ListenerBase
 {
-    public OkWeightDialogButtonLister(MainWindow a) {
+    WeightDialog dialog;
+
+    public TextAreaActionListener(MainWindow a, WeightDialog dialog)
+    {
         super(a);
+        this.dialog = dialog;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        window.setEnabled(true);
+        dialog.loadWeight();
+        dialog.setVisible(false);
     }
 }
+
+class WeightDialogWindowListener extends WindowAdapter
+{
+    private WeightDialog dialog;
+
+    public  WeightDialogWindowListener(WeightDialog dialog)
+    {
+        this.dialog = dialog;
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        dialog.notOk();
+        super.windowClosing(e);
+    }
+}
+
 
 class GraphPanelMouseListener implements MouseListener{
     private final GraphPanel panel;
@@ -111,11 +130,19 @@ class GraphPanelMouseListener implements MouseListener{
                 if (addEdgeResult != null)
                 {
                     if (VertexSave != null) {
+
                         WeightDialog dialog = new WeightDialog(window);
                         dialog.setVisible(true);
 
+                        boolean dialogResult = dialog.isOk();
+                        if (!dialogResult)
+                        {
+                            window.setButtonState(ButtonState.noButton);
+                            VertexSave = null;
+                            return;
+                        }
 
-                        panel.addEdge(new Edge(VertexSave, addEdgeResult, Color.BLACK, 10));
+                        panel.addEdge(new Edge(VertexSave, addEdgeResult, Color.BLACK, dialog.getWeight()));
                         window.setButtonState(ButtonState.noButton);
                         VertexSave = null;
                     }
