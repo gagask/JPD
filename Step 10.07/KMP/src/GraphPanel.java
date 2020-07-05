@@ -1,7 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-import java.util.*;
+import java.sql.Time;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Random;
+
 import java.util.List;
 
 public class GraphPanel extends JPanel {
@@ -9,6 +15,7 @@ public class GraphPanel extends JPanel {
     private ArrayList<Edge> edgeList = new ArrayList<Edge>();
 
     private final JPanel MainWindowPanel;
+    private final static long REFRESH_LIST_PERIOD=10 * 60 * 1000; //10 minutes
 
     public GraphPanel(JPanel MainWindowPanel)
     {
@@ -91,18 +98,23 @@ public class GraphPanel extends JPanel {
         MainWindowPanel.repaint();
     }
 
-    public void AlgorithPrima() {
+    public void AlgorithPrima() throws InterruptedException {
         Random random = new Random();
-        Thread th = Thread.currentThread( );
+
         int startVertexInd = random.nextInt(vertexList.size());
 
         HashSet<Vertex> resultVertexSet = new HashSet<Vertex>();
         resultVertexSet.add(vertexList.get(startVertexInd));
 
-        vertexList.get(startVertexInd).changeColor(Color.GREEN);
-        MainWindowPanel.repaint();
-        long Time = System.currentTimeMillis();
-        while(System.currentTimeMillis() < Time + 500){}
+        Timer timer = new Timer(8000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ea) {
+                vertexList.get(startVertexInd).changeColor(Color.GREEN);
+                MainWindowPanel.repaint();
+            }
+        });
+        timer.start();
+        Thread.sleep(7000);
 
         HashSet<Edge> resultEdgeSet = new HashSet<Edge>();
         HashSet<Edge> curTreeEdge = new HashSet<Edge>();
@@ -123,6 +135,9 @@ public class GraphPanel extends JPanel {
 
                     if (!resultVertexSet.contains(curNewVertex))
                         curTreeEdge.add(e);
+
+
+
                 }
 
             }
@@ -131,7 +146,6 @@ public class GraphPanel extends JPanel {
             for (Edge e : curTreeEdge)
             {
                 e.changeColor(Color.YELLOW);
-                MainWindowPanel.repaint();
                 if (min == null || e.getWeight() < min.getWeight())
                     min = e;
             }
@@ -140,14 +154,12 @@ public class GraphPanel extends JPanel {
             resultEdgeSet.add(min);
 
             min.changeColor(Color.GREEN);
-            MainWindowPanel.repaint();
 
             Vertex curNewVertex = endings.from;
             if (resultVertexSet.contains(curNewVertex))
                 curNewVertex = endings.to;
 
             curNewVertex.changeColor(Color.GREEN);
-            MainWindowPanel.repaint();
 
             resultVertexSet.add(curNewVertex);
 
@@ -155,6 +167,5 @@ public class GraphPanel extends JPanel {
         }
 
         edgeList = new ArrayList<Edge>(resultEdgeSet);
-        MainWindowPanel.repaint();
     }
 }

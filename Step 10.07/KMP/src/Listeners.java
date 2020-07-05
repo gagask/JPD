@@ -58,7 +58,11 @@ class StartButtonListener extends ListenerBase{
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        window.getGraph().AlgorithPrima();
+        try {
+            window.getGraph().AlgorithPrima();
+        } catch (InterruptedException interruptedException) {
+            interruptedException.printStackTrace();
+        }
     }
 }
 
