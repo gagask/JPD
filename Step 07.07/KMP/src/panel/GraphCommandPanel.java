@@ -1,3 +1,5 @@
+package panel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,7 +14,7 @@ public class GraphCommandPanel extends JPanel {
     private JButton addEdge;
     private JButton removeEdge;
 
-    GraphCommandPanel()
+    public GraphCommandPanel()
     {
         setBorder(BorderFactory.createEmptyBorder(0,10,0,10));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

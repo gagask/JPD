@@ -1,3 +1,5 @@
+package panel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,7 +12,7 @@ public class AlgorithmCommandPanel extends JPanel{
     private JButton Restart;
     private JButton Exit;
 
-    AlgorithmCommandPanel()
+    public AlgorithmCommandPanel()
     {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(BorderFactory.createEmptyBorder(0,20,0,10));

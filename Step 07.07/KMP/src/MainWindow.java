@@ -1,17 +1,11 @@
+import panel.AlgorithmCommandPanel;
+import panel.GraphCommandPanel;
 import graph.GraphPanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-enum ButtonState{
-    addVertex,
-    removeVertex,
-    removeEdge,
-    addEdge,
-    noButton
-}
 
 public class MainWindow extends JFrame {
 
