@@ -1,29 +1,54 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class WeightDialog extends JDialog {
-    private final JTextField area;
-    private final JLabel label;
+    private JTextField area;
+    private JLabel label;
     private int weight;
     private boolean ok = true;
 
     public WeightDialog(MainWindow window)
     {
         super(window, "Вес ребра", true);
-
-        setLayout(new FlowLayout());
         setResizable(false);
         setLocationRelativeTo(null);
         setSize(200, 80);
-        addWindowListener(new WeightDialogWindowListener(this));
+        addWindowListener(new WindowAdapter() {
 
-        label = new JLabel("Введите вес ребра: ");
-        area = new JTextField(4);
+            @Override
+            public void windowClosing(WindowEvent e) {
+                ok = false;
+                super.windowClosing(e);
+            }
+        });
+        setLayout(new FlowLayout());
 
-        area.addActionListener(new TextAreaActionListener(window, this));
+        initLabel();
+        initTextArea();
 
         add(label);
         add(area);
+    }
+
+    private void initTextArea()
+    {
+        area = new JTextField(4);
+        area.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                loadWeight();
+                setVisible(false);
+            }
+        });
+    }
+
+    private void initLabel()
+    {
+        label = new JLabel("Введите вес ребра: ");
     }
 
     public void loadWeight()
@@ -45,11 +70,6 @@ public class WeightDialog extends JDialog {
     public int getWeight()
     {
         return weight;
-    }
-
-    public void notOk()
-    {
-        ok = false;
     }
 
     public boolean isOk()
