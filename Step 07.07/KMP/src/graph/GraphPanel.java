@@ -29,23 +29,7 @@ public class GraphPanel extends JPanel {
             return;
         }
 
-        final int[] k = {1};
-        Timer timer = new Timer(1000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("lox bluat ebanui");
-                k[0] = 0;
-            }
-        });
-        timer.setRepeats(false);
-        timer.setInitialDelay(0);
-        timer.start();
-
         int startVertexInd = random.nextInt(g.vertexList.size());
-        g.vertexList.get(startVertexInd).changeColor(Color.GREEN);
-        MainWindowPanel.repaint();
-        while (k[0] == 1)
-        {}
 
         HashSet<Vertex> resultVertexSet = new HashSet<Vertex>();
         resultVertexSet.add(g.vertexList.get(startVertexInd));
@@ -77,12 +61,6 @@ public class GraphPanel extends JPanel {
             Edge min = null;
             for (Edge e : curTreeEdge)
             {
-                e.changeColor(Color.YELLOW);
-                k[0] = 1;
-                while (k[0] == 1)
-                {}
-
-                MainWindowPanel.repaint();
                 if (min == null || e.getWeight() < min.getWeight())
                     min = e;
             }
@@ -92,9 +70,6 @@ public class GraphPanel extends JPanel {
                 JOptionPane.showMessageDialog(window, "Граф должен быть связным!", "Ошибка", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-
-            min.changeColor(Color.GREEN);
-
             VertexPair endings = min.getEndings();
             resultEdgeSet.add(min);
 

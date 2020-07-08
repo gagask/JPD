@@ -25,8 +25,8 @@ public class MainWindow extends JFrame {
     public MainWindow(String title){
         super(title);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
         setSize(720,480);
+        setLocationRelativeTo(null);
         setResizable(false);
 
         gcp = new GraphCommandPanel();
