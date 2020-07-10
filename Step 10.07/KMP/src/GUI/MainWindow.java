@@ -55,6 +55,7 @@ public class MainWindow extends JFrame {
                 graphPanel.setGraph(algorithm.getDefaultGraph());
                 MainWindowPanel.remove(acp);
                 MainWindowPanel.add(gcp, 0);
+                openItem.setEnabled(true);
             }
         });
 
