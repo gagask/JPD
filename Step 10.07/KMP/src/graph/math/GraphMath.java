@@ -24,6 +24,9 @@ public class GraphMath {
         vertexList = new HashSet<Vertex>();
         edgeList = new HashSet<Edge>();
 
+        if (other.vertexList.size() == 0)
+            return;
+
         HashMap<Vertex, Vertex> d = new HashMap<Vertex, Vertex>(other.vertexList.size());
 
         for (Vertex v : other.vertexList)
@@ -73,30 +76,6 @@ public class GraphMath {
         getAchievableVertices(v, result);
 
         return vertexList.size() == result.size();
-
-        /*while (seenVertex.size() != vertexList.size())
-        {
-            HashSet<Vertex> save = new HashSet<Vertex>(seenVertex);
-            for (Vertex cur : seenVertex)
-            {
-                ArrayList<Edge> tmpEdgeList = getIncidentalEdges(cur);
-
-                for (Edge e : tmpEdgeList) {
-                    VertexPair curEdgeEndings = e.getEndings();
-                    Vertex curNewVertex = curEdgeEndings.from;
-                    if (v == curNewVertex)
-                        curNewVertex = curEdgeEndings.to;
-                    save.add(curNewVertex);
-                }
-            }
-
-            if (save.size() == seenVertex.size())
-                return false;
-
-            seenVertex = save;
-
-        }*/
-
     }
 
     private void getAchievableVertices(Vertex v, HashSet<Vertex> result)

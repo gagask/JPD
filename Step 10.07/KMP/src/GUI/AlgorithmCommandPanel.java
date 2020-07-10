@@ -100,6 +100,7 @@ public class AlgorithmCommandPanel extends JPanel{
         {
             NextStep.setEnabled(false);
             ForceAns.setEnabled(false);
+
         }
 
 

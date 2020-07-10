@@ -55,7 +55,6 @@ public class MainWindow extends JFrame {
                 graphPanel.setGraph(algorithm.getDefaultGraph());
                 MainWindowPanel.remove(acp);
                 MainWindowPanel.add(gcp, 0);
-                openItem.setEnabled(true);
             }
         });
 
@@ -88,7 +87,6 @@ public class MainWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-
                 if (graphPanel.getGraph().isEmpty())
                 {
                     JOptionPane.showMessageDialog(window, "Граф не введен!", "Ошибка", JOptionPane.WARNING_MESSAGE);
@@ -100,6 +98,8 @@ public class MainWindow extends JFrame {
                     JOptionPane.showMessageDialog(window, "Граф должен быть связным!", "Ошибка", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
+
+
 
                 MainWindowPanel.remove(gcp);
                 MainWindowPanel.add(acp, 0);

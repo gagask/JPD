@@ -26,4 +26,8 @@ public class State {
     public Graph getGraph() {
         return graph;
     }
+
+    public AlgorithmState getNext() {
+        return next;
+    }
 }

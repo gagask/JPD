@@ -25,6 +25,11 @@ public class Algorithm {
         this.graph = graphPanel.getGraph();
     }
 
+    public Algorithm(Graph graph)
+    {
+        this.graph = graph;
+    }
+
     public void initState()
     {
         state = new State(null, new Graph(graph), AlgorithmState.FirstVertex);
@@ -34,6 +39,12 @@ public class Algorithm {
         state = new State(state, new Graph(state.graph), AlgorithmState.MinEdge);
 
         Random random = new Random();
+
+        if (state.graph.isEmpty())
+        {
+            state = new State(state, new Graph(state.graph), AlgorithmState.End);
+            return;
+        }
 
         int startVertexInd = random.nextInt(state.graph.getVertexList().size());
         int i = 0;
@@ -82,6 +93,8 @@ public class Algorithm {
             if (min == null || e.getWeight() < min.getWeight())
                 min = e;
         }
+        if (min == null)
+            return;
 
         min.changeColor(Color.GREEN);
         VertexPair endings = min.getEndings();
@@ -120,6 +133,9 @@ public class Algorithm {
     public void restart()
     {
         initState();
+        if (graphPanel == null)
+            return;
+
         graphPanel.setGraph(state.graph);
         graphPanel.repaint();
     }
@@ -149,5 +165,10 @@ public class Algorithm {
     {
         this.graph = graph;
         initState();
+    }
+
+    public State state()
+    {
+        return state;
     }
 }
